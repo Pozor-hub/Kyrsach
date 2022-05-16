@@ -1,0 +1,41 @@
+﻿<Page x:Class="Kyrsach.Page1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Kyrsach"
+      mc:Ignorable="d" d:DesignWidth="800"
+      Title="Page1" Height="466">
+
+    <Grid Background="#FF4B5E8C">
+        <ComboBox x:Name="Type_of_number" HorizontalAlignment="Left" Height="31" Margin="526,120,0,0" VerticalAlignment="Top" Width="174" SelectionChanged="Тип_номера_SelectionChanged"/>
+        <TextBox x:Name="Surname" HorizontalAlignment="Left" Height="26" Margin="51,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" TextChanged="Фамилия_TextChanged"/>
+        <TextBox x:Name="Phone" HorizontalAlignment="Left" Height="26" Margin="51,361,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174"/>
+        <TextBox x:Name="Passport" HorizontalAlignment="Left" Height="26" Margin="51,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174"/>
+        <TextBox x:Name="Patronomic" HorizontalAlignment="Left" Height="26" Margin="51,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174"/>
+        <TextBox x:Name="Name" HorizontalAlignment="Left" Height="26" Margin="51,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174"/>
+        <Label Content="Данные гостя" HorizontalAlignment="Left" Height="40" Margin="80,88,0,0" VerticalAlignment="Top" Width="116" Background="#FF4B5E8C" FontWeight="Bold" FontSize="16" RenderTransformOrigin="0.497,0.504" Foreground="#FFC4A189"/>
+        <Label HorizontalContentAlignment="Center" Style="{DynamicResource LabelStyle1}" Content="Регистрация гостя" HorizontalAlignment="Center" Height="61" Margin="0,10,0,0" VerticalAlignment="Top" Width="372" FontWeight="Bold" FontSize="36" Background="#FF2B395B" Foreground="#FFC4A189"/>
+        <DatePicker x:Name="Check_in_date" HorizontalAlignment="Left" Margin="574,168,0,0" VerticalAlignment="Top" Foreground="Black" SelectedDateChanged="SelectedDateChanged"/>
+        <TextBox x:Name="Number_of_nights" HorizontalAlignment="Left" Margin="572,278,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="Number_of_nights_TextChanged" Height="26"/>
+        <ComboBox x:Name="Room_number" HorizontalAlignment="Left" Margin="572,316,0,0"  VerticalAlignment="Top" Width="120"/>
+        <DatePicker x:Name="Check_out_date" HorizontalAlignment="Left" Margin="574,201,0,0" VerticalAlignment="Top" SelectedDateChanged="SelectedDateChanged"/>
+        <Button x:Name="Register" Content="REG" Margin="654,344,25,0" VerticalAlignment="Top" Height="49" Background="{x:Null}" FontWeight="Bold" FontSize="24" Foreground="#FFC4A189" BorderBrush="#FF4B5E8C" Click="Button_Click"/>
+        <TextBlock HorizontalAlignment="Left" Height="25" Margin="66,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" FontSize="16" FontWeight="Bold" Text="        Фамилия" Foreground="#FFC4A189"/>
+        <TextBlock HorizontalAlignment="Left" Height="25" Margin="66,179,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" FontSize="16" FontWeight="Bold" Foreground="#FFC4A189"><Run Language="ru-ru" Text="           Имя"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Height="25" Margin="66,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" FontSize="16" FontWeight="Bold" Foreground="#FFC4A189"><Run Language="ru-ru" Text="        Отчество"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Height="25" Margin="66,283,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" FontSize="16" FontWeight="Bold" Foreground="#FFC4A189"><Run Language="ru-ru" Text="        Паспорт"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Height="25" Margin="66,339,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" FontSize="16" FontWeight="Bold" Text="       Телефон" Foreground="#FFC4A189"/>
+        <TextBlock HorizontalAlignment="Left" Height="24" Margin="554,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" FontSize="16" FontWeight="Bold" Foreground="#FFC4A189"><Run Language="ru-ru" Text="Тип номера"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Height="25" Margin="439,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" FontSize="16" FontWeight="Bold" Foreground="#FFC4A189"><Run Text="        "/><Run Language="ru-ru" Text="  "/><Run Text="Заселение"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Height="24" Margin="439,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" FontSize="16" FontWeight="Bold" Foreground="#FFC4A189"><Run Text="     "/><Run Text=" "/><Run Language="ru-ru" Text="  "/><Run Text=" "/><Run Text="Выселение"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Height="26" Margin="439,278,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" FontSize="16" FontWeight="Bold" Foreground="#FFC4A189"><Run Text="   "/><Run Language="ru-ru" Text=" "/><Run Text="Кол-во ночей"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Height="24" Margin="436,242,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" FontSize="16" FontWeight="Bold" Foreground="#FFC4A189"><Run Language="ru-ru" Text="Стоимость сутки"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Height="25" Margin="434,313,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" FontSize="16" FontWeight="Bold" Foreground="#FFC4A189"><Run Text="                 "/><Run Language="ru-ru" Text="Номер"/><Run Text="  "/><Run Text="Номер"/></TextBlock>
+        <ComboBox x:Name="Cost_per_day" HorizontalAlignment="Left" Margin="574,244,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Cost_per_day_SelectionChanged"/>
+        <Label x:Name="Amount" HorizontalAlignment="Left" Margin="477,390,0,0"  VerticalAlignment="Top" Height="33" Width="177" FontWeight="Bold" FontSize="16" Foreground="#FF003EFF"/>
+        <Button x:Name="Подсчит" Content="Подсчитать" HorizontalAlignment="Left" Margin="506,350,0,0" VerticalAlignment="Top" Height="38" Width="118" FontWeight="Bold" FontSize="16" Background="#FF4B5E8C" Click="Подсчитать_Click" BorderBrush="#FF4B5E8C" Foreground="#FFC4A189"/>
+        <Button x:Name="туда" Content="Button" HorizontalAlignment="Left" Height="33" Margin="299,183,0,0" VerticalAlignment="Top" Width="92" Click="Button_Click_1"/>
+
+    </Grid>
+</Page>

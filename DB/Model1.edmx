@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище k_09Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Бронь">
+          <Key>
+            <PropertyRef Name="Код бронирования" />
+          </Key>
+          <Property Name="Код бронирования" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Номер номера" Type="bigint" Nullable="false" />
+          <Property Name="Гость" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Дата заселения" Type="date" />
+          <Property Name="Дата выселения" Type="date" />
+          <Property Name="Кол-во ночей" Type="int" />
+          <Property Name="Стоимость (в день)" Type="money" />
+          <Property Name="Итого" Type="money" />
+        </EntityType>
+        <EntityType Name="Номер_Статус">
+          <Key>
+            <PropertyRef Name="Номер номера" />
+            <PropertyRef Name="Статус номера" />
+          </Key>
+          <Property Name="Номер номера" Type="bigint" Nullable="false" />
+          <Property Name="Статус номера" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Номера">
+          <Key>
+            <PropertyRef Name="Номер" />
+          </Key>
+          <Property Name="Номер" Type="bigint" Nullable="false" />
+          <Property Name="Количество комнат" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Количество персон" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Стоимость(день)" Type="money" Nullable="false" />
+          <Property Name="Тип номера" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Регистрация">
+          <Key>
+            <PropertyRef Name="Паспорт" />
+          </Key>
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Отчество" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Паспорт" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Телефон" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Тип номера" Type="varchar" MaxLength="25" />
+          <Property Name="Дата заселения" Type="date" />
+          <Property Name="Дата выселения" Type="date" />
+          <Property Name="Стоимость в день" Type="money" />
+          <Property Name="Кол-во ночей" Type="int" />
+          <Property Name="Номер" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Статусы номеров">
+          <Key>
+            <PropertyRef Name="Название" />
+          </Key>
+          <Property Name="Название" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Бронь_Номера">
+          <End Role="Номера" Type="Self.Номера" Multiplicity="1" />
+          <End Role="Бронь" Type="Self.Бронь" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Номера">
+              <PropertyRef Name="Номер" />
+            </Principal>
+            <Dependent Role="Бронь">
+              <PropertyRef Name="Номер номера" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Бронь_Регистрация">
+          <End Role="Регистрация" Type="Self.Регистрация" Multiplicity="1" />
+          <End Role="Бронь" Type="Self.Бронь" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Регистрация">
+              <PropertyRef Name="Паспорт" />
+            </Principal>
+            <Dependent Role="Бронь">
+              <PropertyRef Name="Гость" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Номер_Статус_Номера">
+          <End Role="Номера" Type="Self.Номера" Multiplicity="1" />
+          <End Role="Номер_Статус" Type="Self.Номер_Статус" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Номера">
+              <PropertyRef Name="Номер" />
+            </Principal>
+            <Dependent Role="Номер_Статус">
+              <PropertyRef Name="Номер номера" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Номер_Статус_Статусы номеров1">
+          <End Role="Статусы номеров" Type="Self.Статусы номеров" Multiplicity="1" />
+          <End Role="Номер_Статус" Type="Self.Номер_Статус" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Статусы номеров">
+              <PropertyRef Name="Название" />
+            </Principal>
+            <Dependent Role="Номер_Статус">
+              <PropertyRef Name="Статус номера" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище k_09ModelContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Бронь" EntityType="Self.Бронь" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Номер_Статус" EntityType="Self.Номер_Статус" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Номера" EntityType="Self.Номера" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Регистрация" EntityType="Self.Регистрация" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Статусы номеров" EntityType="Self.Статусы номеров" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Бронь_Номера" Association="Self.FK_Бронь_Номера">
+            <End Role="Номера" EntitySet="Номера" />
+            <End Role="Бронь" EntitySet="Бронь" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Бронь_Регистрация" Association="Self.FK_Бронь_Регистрация">
+            <End Role="Регистрация" EntitySet="Регистрация" />
+            <End Role="Бронь" EntitySet="Бронь" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Номер_Статус_Номера" Association="Self.FK_Номер_Статус_Номера">
+            <End Role="Номера" EntitySet="Номера" />
+            <End Role="Номер_Статус" EntitySet="Номер_Статус" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Номер_Статус_Статусы номеров1" Association="Self.FK_Номер_Статус_Статусы номеров1">
+            <End Role="Статусы номеров" EntitySet="Статусы номеров" />
+            <End Role="Номер_Статус" EntitySet="Номер_Статус" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="k_09Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Бронь">
+          <Key>
+            <PropertyRef Name="Код_бронирования" />
+          </Key>
+          <Property Name="Код_бронирования" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Номер_номера" Type="Int64" Nullable="false" />
+          <Property Name="Гость" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Дата_заселения" Type="DateTime" Precision="0" />
+          <Property Name="Дата_выселения" Type="DateTime" Precision="0" />
+          <Property Name="Кол_во_ночей" Type="Int32" />
+          <Property Name="Стоимость__в_день_" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Итого" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Номера" Relationship="Self.FK_Бронь_Номера" FromRole="Бронь" ToRole="Номера" />
+          <NavigationProperty Name="Регистрация" Relationship="k_09Model.FK_Бронь_Регистрация" FromRole="Бронь" ToRole="Регистрация" />
+        </EntityType>
+        <EntityType Name="Номера">
+          <Key>
+            <PropertyRef Name="Номер" />
+          </Key>
+          <Property Name="Номер" Type="Int64" Nullable="false" />
+          <Property Name="Количество_комнат" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Количество_персон" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Стоимость_день_" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Тип_номера" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Бронь" Relationship="Self.FK_Бронь_Номера" FromRole="Номера" ToRole="Бронь" />
+          <NavigationProperty Name="Статусы_номеров" Relationship="Self.Номер_Статус" FromRole="Номера" ToRole="Статусы_номеров" />
+        </EntityType>
+        <EntityType Name="Регистрация">
+          <Key>
+            <PropertyRef Name="Паспорт" />
+          </Key>
+          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Отчество" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Паспорт" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Телефон" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Тип_номера" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Дата_заселения" Type="DateTime" Precision="0" />
+          <Property Name="Дата_выселения" Type="DateTime" Precision="0" />
+          <Property Name="Стоимость_в_день" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Кол_во_ночей" Type="Int32" />
+          <Property Name="Номер" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Бронь" Relationship="k_09Model.FK_Бронь_Регистрация" FromRole="Регистрация" ToRole="Бронь" />
+        </EntityType>
+        <EntityType Name="Статусы_номеров">
+          <Key>
+            <PropertyRef Name="Название" />
+          </Key>
+          <Property Name="Название" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Номера" Relationship="Self.Номер_Статус" FromRole="Статусы_номеров" ToRole="Номера" />
+        </EntityType>
+        <Association Name="FK_Бронь_Номера">
+          <End Role="Номера" Type="Self.Номера" Multiplicity="1" />
+          <End Role="Бронь" Type="Self.Бронь" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Номера">
+              <PropertyRef Name="Номер" />
+            </Principal>
+            <Dependent Role="Бронь">
+              <PropertyRef Name="Номер_номера" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Номер_Статус">
+          <End Role="Номера" Type="Self.Номера" Multiplicity="*" />
+          <End Role="Статусы_номеров" Type="Self.Статусы_номеров" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="k_09Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Бронь" EntityType="Self.Бронь" />
+          <EntitySet Name="Номера" EntityType="Self.Номера" />
+          <EntitySet Name="Регистрация" EntityType="Self.Регистрация" />
+          <EntitySet Name="Статусы_номеров" EntityType="Self.Статусы_номеров" />
+          <AssociationSet Name="FK_Бронь_Номера" Association="Self.FK_Бронь_Номера">
+            <End Role="Номера" EntitySet="Номера" />
+            <End Role="Бронь" EntitySet="Бронь" />
+          </AssociationSet>
+          <AssociationSet Name="Номер_Статус" Association="Self.Номер_Статус">
+            <End Role="Номера" EntitySet="Номера" />
+            <End Role="Статусы_номеров" EntitySet="Статусы_номеров" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Бронь_Регистрация" Association="k_09Model.FK_Бронь_Регистрация">
+            <End Role="Регистрация" EntitySet="Регистрация" />
+            <End Role="Бронь" EntitySet="Бронь" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Бронь_Регистрация">
+          <End Type="k_09Model.Регистрация" Role="Регистрация" Multiplicity="1" />
+          <End Type="k_09Model.Бронь" Role="Бронь" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Регистрация">
+              <PropertyRef Name="Паспорт" />
+            </Principal>
+            <Dependent Role="Бронь">
+              <PropertyRef Name="Гость" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище k_09ModelContainer" CdmEntityContainer="k_09Entities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="k_09Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Бронь">
+            <EntityTypeMapping TypeName="k_09Model.Бронь">
+              <MappingFragment StoreEntitySet="Бронь">
+                <ScalarProperty Name="Код_бронирования" ColumnName="Код бронирования" />
+                <ScalarProperty Name="Номер_номера" ColumnName="Номер номера" />
+                <ScalarProperty Name="Гость" ColumnName="Гость" />
+                <ScalarProperty Name="Дата_заселения" ColumnName="Дата заселения" />
+                <ScalarProperty Name="Дата_выселения" ColumnName="Дата выселения" />
+                <ScalarProperty Name="Кол_во_ночей" ColumnName="Кол-во ночей" />
+                <ScalarProperty Name="Стоимость__в_день_" ColumnName="Стоимость (в день)" />
+                <ScalarProperty Name="Итого" ColumnName="Итого" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Номера">
+            <EntityTypeMapping TypeName="k_09Model.Номера">
+              <MappingFragment StoreEntitySet="Номера">
+                <ScalarProperty Name="Номер" ColumnName="Номер" />
+                <ScalarProperty Name="Количество_комнат" ColumnName="Количество комнат" />
+                <ScalarProperty Name="Количество_персон" ColumnName="Количество персон" />
+                <ScalarProperty Name="Стоимость_день_" ColumnName="Стоимость(день)" />
+                <ScalarProperty Name="Тип_номера" ColumnName="Тип номера" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Регистрация">
+            <EntityTypeMapping TypeName="k_09Model.Регистрация">
+              <MappingFragment StoreEntitySet="Регистрация">
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Паспорт" ColumnName="Паспорт" />
+                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+                <ScalarProperty Name="Тип_номера" ColumnName="Тип номера" />
+                <ScalarProperty Name="Дата_заселения" ColumnName="Дата заселения" />
+                <ScalarProperty Name="Дата_выселения" ColumnName="Дата выселения" />
+                <ScalarProperty Name="Стоимость_в_день" ColumnName="Стоимость в день" />
+                <ScalarProperty Name="Кол_во_ночей" ColumnName="Кол-во ночей" />
+                <ScalarProperty Name="Номер" ColumnName="Номер" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Статусы_номеров">
+            <EntityTypeMapping TypeName="k_09Model.Статусы_номеров">
+              <MappingFragment StoreEntitySet="Статусы номеров">
+                <ScalarProperty Name="Название" ColumnName="Название" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Номер_Статус" TypeName="k_09Model.Номер_Статус" StoreEntitySet="Номер_Статус">
+            <EndProperty Name="Номера">
+              <ScalarProperty Name="Номер" ColumnName="Номер номера" />
+            </EndProperty>
+            <EndProperty Name="Статусы_номеров">
+              <ScalarProperty Name="Название" ColumnName="Статус номера" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

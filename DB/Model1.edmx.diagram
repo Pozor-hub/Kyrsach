@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f7c394e2b8da49169e17f2cf4d6bbdd9" Name="Diagram1">
+        <EntityTypeShape EntityType="k_09Model.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="k_09Model.Бронь" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="k_09Model.Номера" Width="1.875" PointX="1" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="k_09Model.Регистрация" Width="1.5" PointX="7.375" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="k_09Model.Статусы_номеров" Width="1.5" PointX="3.125" PointY="6.25" IsExpanded="true" />
+        <AssociationConnector Association="k_09Model.FK_Бронь_Номера" ManuallyRouted="false" />
+        <AssociationConnector Association="k_09Model.Номер_Статус" ManuallyRouted="false" />
+        <AssociationConnector Association="k_09Model.FK_Бронь_Регистрация" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
